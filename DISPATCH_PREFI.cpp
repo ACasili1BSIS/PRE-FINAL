@@ -12,7 +12,7 @@ int Blazer_Impression_Score = 0;
 int Robert_Mercy_Rating = 0;
 
 string combatStyle = "Undecided";
-string publicReputation = "Unknown";
+string publicReputation = "Popular";
 
 /* ========= FUNCTION DECLARATIONS ========= */
 void printDispatchGameLogo();
@@ -58,8 +58,8 @@ void scene_interrogation() {
     cout << "=== DISPATCH: EPISODE 1 — PIVOT ===\n";
     cin.get();
     cout << "\n[Apartment Rooftop]\n";
-    cout << "You are playing as Robert, interrogating the robber as he soon dangled on the ledge..\n";
-    cout << "Robber: \"Please! I’ll talk! Just don’t drop me!\"\n";
+    cout << "You are playing as Robert, interrogating the Soothing Goon as he soon dangled on the ledge..\n";
+    cout << "Soothing Goon: \"Please! I’ll talk! Just don’t drop me!\"\n";
     cin.get();
     cout << "1. Pull him back\n";
     cout << "2. Let him drop\n";
@@ -67,22 +67,35 @@ void scene_interrogation() {
     cin >> choice;
 
     if (choice == 1) {
-        isMerciful = true;
-        Robert_Mercy_Rating += 10;
-        publicReputation = "Compassionate";
+    isMerciful = true;
+    Robert_Mercy_Rating += 10;
+    publicReputation = "Compassionate";
 
-        cout << "\nRobert: \"You’re done running. Talk.\"\n";
-        cout << "You haul him back to safety. He breaks instantly.\n";
+    cout << "\nRobert: \"You’re done running. Talk.\"\n";
+    cout << "You haul him back to safety. He breaks instantly.\n";
+    cin.get();
+        
+    } else if (choice == 2) {
+    isMerciful = false;
+    Robert_Mercy_Rating -= 5;
+    publicReputation = "Ruthless";
+
+    cout << "\nRobert: \"Wrong answer.\"\n";
+    cout << "You release him. The fall is loud. Plummeting your reputation deeper.\n";
+    cin.get();
+        
     } else {
-        isMerciful = false;
-        Robert_Mercy_Rating -= 5;
-        publicReputation = "Ruthless";
+    isMerciful = false;
+    Robert_Mercy_Rating -= 2;
+    publicReputation = "Unpredictable";
 
-        cout << "\nRobert: \"Wrong answer.\"\n";
-        cout << "You release him. The fall is loud. Plummeting your reputation deeper.\n";
-        cin.get();
+    cout << "\nYou hesitate for too long.\n";
+    cout << "The Soothing Goon slips from your grasp and falls anyway.\n";
+    cout << "People later question your decisiveness.\n";
+    cin.get();
+        
     }
-    
+
 }
 
 /* ========= SCENE 2: STREET FIGHT ========= */
@@ -98,18 +111,29 @@ void scene_street_fight() {
     cin >> choice;
 
     if (choice == 1) {
-        streetFightSuccess = false;
-        cout << "\nYou swing right.\n";
-        cout << "The thug anticipates it as pain explodes when the crowbar landed a hit on you.\n";
-        cout << "Lesson learned the hard way.\n";
-    } else {
-        streetFightSuccess = true;
-        cout << "\nYou pivot and strike with your left.\n";
-        cout << "Clean hit. The thug collapses instantly.\n";
-        cin.get();
-    }
-}
+    streetFightSuccess = false;
 
+    cout << "\nYou swing right.\n";
+    cout << "The thug anticipates it and cracks you with the crowbar.\n";
+    cin.get();
+        
+    } else if (choice == 2) {
+    streetFightSuccess = true;
+
+    cout << "\nYou pivot and strike with your left.\n";
+    cout << "Clean hit. The thug collapses instantly.\n";
+    cin.get();
+        
+    } else {
+    streetFightSuccess = false;
+
+    cout << "\nYou freeze for a split second.\n";
+    cout << "The hesitation costs you as the crowbar slams into your ribs.\n";
+    cin.get();
+        
+    }
+
+}
 /* ========= SCENE 3: SUPERHERO BAR (FLAMBAE) ========= */
 void scene_bar_flambae() {
     int choice;
@@ -122,21 +146,29 @@ void scene_bar_flambae() {
     cout << "Choice: ";
     cin >> choice;
 
-    if (choice == 1) {
-        Blazer_Impression_Score += 5;
-
-        cout << "\nThe flames die instantly.\n";
-        cout << "Flambae screams as the steam burns linger.\n";
-        cout << "Blonde Blazer looks conflicted.\n";
-    } else {
+    if (choice == 2) {
         Blazer_Impression_Score += 15;
 
         cout << "\nThe alcohol ignites everything.\n";
-        cout << "Fire roars. Chaos erupts.\n";
-        cout << "Blonde Blazer will remember this vividly. \"\n";
+        cout << "The fire erupts violently as chaoe erupts, making Flambae leave.\n";
         cin.get();
+
+    } else {
+        // Water choice OR invalid input defaults here
+        Blazer_Impression_Score += 5;
+
+        cout << "\nYou react and grab water.\n";
+        cout << "The flames hiss and die down almost instantly .\n";
+        cout << "Flambae screams as the steam burns linger.\n";
+        cin.get();
+
+        if (choice != 1) {
+            cout << "Your hesitation costs you a second, but water was the safest call.\n";
+            cout << "Flambae screams as the steam burns linger.\n";
+            cout << "Blonde Blazer will remember your quick recovery.\n";
+            cin.get();
+        }
     }
-    
 }
 
 /* ========= SCENE 4: BILLBOARD ROMANCE ========= */
@@ -153,22 +185,32 @@ void scene_billboard() {
     cin >> choice;
 
     if (choice == 1) {
-        isRomanticTensionActive = true;
-        Blazer_Impression_Score += 10;
+    isRomanticTensionActive = true;
+    Blazer_Impression_Score += 10;
 
-        cout << "\nYou lean in.\n";
-        cout << "The kiss is awkward… but real.\n";
-        cout << "Blonde Blazer exhales: \"Guess we’ll see where this goes.\"\n";
+    cout << "\nYou lean in.\n";
+    cout << "The kiss is awkward… but real.\n";
+    cin.get();
+        
+    } else if (choice == 2) {
+    isRomanticTensionActive = false;
+
+    cout << "\nYou step back.\n";
+    cout << "Blonde Blazer nods, understanding.\n";
+    cin.get();
+        
     } else {
-        isRomanticTensionActive = false;
+    isRomanticTensionActive = false;
+    Blazer_Impression_Score -= 3;
 
-        cout << "\nYou step back.\n";
-        cout << "Blonde Blazer nods, understanding.\n";
-        cout << "\"Another life, maybe.\"\n";
-        cin.get();
+    cout << "\nYou say nothing.\n";
+    cout << "The silence becomes uncomfortable.\n";
+    cout << "The moment quietly fades away.\n";
+    cin.get();
+        
     }
-}
 
+}
 /* ========= SCENE 5: COMBAT DECISION (TOXIC) ========= */
 void scene_combat_toxic() {
     int choice;
@@ -182,23 +224,29 @@ void scene_combat_toxic() {
     cin >> choice;
 
     if (choice == 1) {
-        combatStyle = "Creative";
-        cout << "\nYou punt Toxic across the street.\n";
-        cout << "Improvised. Effective. Almost funny.\n";
+    combatStyle = "Creative";
+
+    cout << "\nYou punt Toxic across the street.\n";
+    cout << "Improvised. Effective.\n";
+    cin.get();
+        
+    } else if (choice == 2) {
+    combatStyle = "Brutal";
+
+    cout << "\nYou stomp down hard.\n";
+    cout << "The fight ends immediately.\n";
+    cin.get();
+        
     } else {
-        combatStyle = "Brutal";
-        cout << "\nYou stomp down hard.\n";
-        cout << "The fight ends immediately.\n";
+    combatStyle = "Reckless";
+
+    cout << "\nYou hesitate at the worst possible moment.\n";
+    cout << "Toxic nearly turns the fight around before you recover.\n";
+    cin.get();
+        
     }
 
-    if (isMerciful) {
-        cout << "You stop before crossing the line.\n";
-    } else {
-        cout << "You don’t hesitate.\n";
-        cin.get();
-    }
 }
-
 /* ========= EPILOGUE ========= */
 void epilogue_summary() {
     cout << "\n=== EPILOGUE ===\n";
@@ -234,7 +282,6 @@ void epilogue_summary() {
     cout << "Combat Style: " << combatStyle << endl;
     cout << "Reputation: " << publicReputation << endl;
     cin.get();
+    
     cout << "\n=== END OF EPISODE 1 ===\n";
 }
-
-
